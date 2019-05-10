@@ -12,11 +12,12 @@ int power(int n) {
 //3-rd factor
 using namespace std;
 int main(int argc, char * argv[]) {
-    std::ifstream input("../examples07070174.wav", std::ios_base::binary);
+    double factor = atof(argv[1]);
+    double sec = atof(argv[2]);
+    std::ifstream input(argv[3], std::ios_base::binary);
     std::istreambuf_iterator<char> start(input);
     std::istreambuf_iterator<char> end;
     std::vector<char> buf(start, end);
-//    cout<<buf.size()<<endl;
     vector<Complex> comp = parse(buf, 0);
     vector<Complex> comp1 = parse(buf, 1);
     while (comp.size() != power(comp.size())) {
@@ -27,10 +28,10 @@ int main(int argc, char * argv[]) {
     std::vector<Complex> spectr3 = fft(comp1, comp1.size(), 0);
 //----TASK 1----
     
-    double time = 0.01;
-    int p = 0.5;
+//    double time = 0.01;
+//    int p = 0.5;
     double max = 0.0;
-    int prev = 0, step = 44100 * time, count = 0; 
+    int prev = 0, step = 44100 * sec, count = 0; 
     cout<<step<<endl;
     for (int i = 0; i < spectr2.size(); i++) {
        if (i % step != 0) {
@@ -40,7 +41,7 @@ int main(int argc, char * argv[]) {
             count++;
             int len = i - prev;
             for (int j = prev; j < len; j++) {
-                if (spectr2[j].amp() > p * max) {
+                if (spectr2[j].amp() > factor * max) {
                     cout<<44100.0 / spectr2.size() * j<<endl;
                 }
             }
@@ -48,5 +49,7 @@ int main(int argc, char * argv[]) {
             prev = i;
         }
     }
+
+//    cout<<factor<<' '<<sec<<endl;
     return 0;
 }

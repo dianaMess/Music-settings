@@ -9,8 +9,10 @@ int power(int n) {
     return d;
 }
  
-int main() {
-    std::ifstream input("../examples/07070057.wav", std::ios_base::binary);
+int main(int argc, char * argv[]) {
+    int factor = atof(argv[1]);
+    int sec = atof(argv[2]);
+    std::ifstream input(argv[3], std::ios_base::binary);
     std::istreambuf_iterator<char> start(input);
     std::istreambuf_iterator<char> end;
     std::vector<char> buf(start, end);
@@ -32,10 +34,10 @@ int main() {
     int n = spectr2.size();
     cout<<"start"<<endl;
     for (int i = 0; i < n / 2; i++) {
-        vec[i] = spectr2[(int)(i * 0.5)];
-        vec1[i] = spectr3[(int)(i * 0.5)];
-        vec[n - 1 - i] = spectr2[(int)((n - 1 - i) * 0.5)];
-        vec1[n - 1 - i] = spectr3[(int)((n - 1 - i) * 0.5)];
+        vec[i] = spectr2[(int)(i * factor)];
+        vec1[i] = spectr3[(int)(i * factor)];
+        vec[n - 1 - i] = spectr2[(int)((n - 1 - i) * factor)];
+        vec1[n - 1 - i] = spectr3[(int)((n - 1 - i) * factor)];
     }
     vector<Complex> rev = fft(vec, vec.size(), 1); 
     vector<Complex> rev1 = fft(vec1, vec1.size(), 1); 
