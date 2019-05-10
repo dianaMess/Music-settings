@@ -12,7 +12,7 @@ int power(int n) {
 //3-rd factor
 using namespace std;
 int main(int argc, char * argv[]) {
-    std::ifstream input("07070174.wav", std::ios_base::binary);
+    std::ifstream input("../examples07070174.wav", std::ios_base::binary);
     std::istreambuf_iterator<char> start(input);
     std::istreambuf_iterator<char> end;
     std::vector<char> buf(start, end);

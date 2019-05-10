@@ -10,7 +10,7 @@ int power(int n) {
 }
  
 int main() {
-    std::ifstream input("07070057.wav", std::ios_base::binary);
+    std::ifstream input("../examples/07070057.wav", std::ios_base::binary);
     std::istreambuf_iterator<char> start(input);
     std::istreambuf_iterator<char> end;
     std::vector<char> buf(start, end);
