@@ -24,15 +24,10 @@ int main(int argc, char * argv[]) {
         comp.push_back(Complex(0, 0));
         comp1.push_back(Complex(0, 0));
     }
-    std::vector<Complex> spectr2 = fft(comp, comp.size(), 0);
-    std::vector<Complex> spectr3 = fft(comp1, comp1.size(), 0);
-//----TASK 1----
-    
-//    double time = 0.01;
-//    int p = 0.5;
+    std::vector<Complex> spectr2 = fft(comp, comp.size(), 1);
+    std::vector<Complex> spectr3 = fft(comp1, comp1.size(), 1);
     double max = 0.0;
     int prev = 0, step = 44100 * sec, count = 0; 
-    cout<<step<<endl;
     for (int i = 0; i < spectr2.size(); i++) {
        if (i % step != 0) {
             if (spectr2[i].amp() > max) 
@@ -50,6 +45,5 @@ int main(int argc, char * argv[]) {
         }
     }
 
-//    cout<<factor<<' '<<sec<<endl;
     return 0;
 }

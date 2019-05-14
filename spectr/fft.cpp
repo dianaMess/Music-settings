@@ -59,7 +59,11 @@ std::vector<Complex> fft(std::vector<Complex> a, int n, int switch_fft) {
     if (n <= 1)
         return a; 
     int m = 0, k = 0;
-    Complex wn(cos(2 * (M_PI/n)), sin(2 * (M_PI/n))), w(1.0, 0.0);
+    double argument = 2 * (M_PI / n);
+    if (switch_fft)
+        argument *= -1;
+    Complex wn(cos(argument), sin(argument)), w(1.0, 0.0);
+//    Complex wn(cos(2 * (M_PI/n)), sin(2 * (M_PI/n))), w(1.0, 0.0);
     std::vector<Complex> a0(n/2), a1(n/2);
     for (int i = 0; i < n; i++) {
         if (i % 2 == 0)
@@ -77,7 +81,7 @@ std::vector<Complex> fft(std::vector<Complex> a, int n, int switch_fft) {
        y[j + (n/2)] = y0[j] - tmp;
        if (switch_fft) {
            y[j] = y[j] / 2;
-           y[j + n/2] = y[j + n/2] / 2;
+           y[j + (n/2)] = y[j + (n/2)] / 2;
        }
        w = w * wn;
     }
@@ -105,17 +109,15 @@ std::vector<Complex> fft(std::vector<Complex> a, int n, int switch_fft) {
      void write_to_chanel(std::vector<Complex> spectrl, std::vector<Complex> spectrr,
                          int size, std::vector<char> buf) {
         int shift = 0;
-        std::ofstream output("out.wav", std::ios::out | std::ios::binary);
+        std::ofstream output("new.wav", std::ios::out | std::ios::binary);
         std::vector<char> buf2 = buf;
         for (int i = 0; i < 768; i++)
             buf2[i] = buf[i];
         int len = 0;
         for (int i = 0; i < size; i += 4) {
             *(short *)&buf2[768 + i] = spectrl[i].re();
-            *(short *)&buf2[768 + i + 2] = spectrr[i].re();
+//            *(short *)&buf2[768 + i + 2] = spectrr[i].re();
             len = i + 2;
-//            *(short *)&buf2[768 + 4 * shift + 4 * i] = spectrl[i].re();
-//            *(short *)&buf2[768 + 4 * shift + 4 * i + 2] = spectrr[i].re();
         }
         output.write(buf2.data(), len);
         output.close();

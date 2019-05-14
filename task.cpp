@@ -149,12 +149,22 @@ std::vector<Complex> fft(std::vector<Complex> a, int n, bool switch_fft) {
             
  
 int main() {
-    std::ifstream input("07070174.wav", std::ios_base::binary);
+    std::ifstream input("07070057.wav", std::ios_base::binary);
     std::istreambuf_iterator<char> start(input);
     std::istreambuf_iterator<char> end;
     std::vector<char> buf(start, end);
 //    cout<<buf.size()<<endl;
     vector<Complex> comp = parse(buf, 0);
+    std::ofstream file;
+    file.open("f.txt");
+    int size = 4410, shift = 5000;
+    vector<Complex> vec(comp.begin() + shift, comp.begin() + shift + size);
+    for (int i = 0; i < size; i++) {
+        file<<i + shift<<' '<<comp[i]<<endl;
+    }
+    file.close();
+
+/*
     vector<Complex> comp1 = parse(buf, 1);
     while (comp.size() != 1048576) { //здесь до ближайшей степени двойки.Я тут просто сама вписала значение
         comp.push_back(Complex(0, 0));
@@ -190,7 +200,7 @@ int main() {
 
 //----TASK 2----
 //change spectr
-/*
+
     vector<Complex> vec(spectr2.size() / 2);
     vector<Complex> vec1(spectr3.size() / 2);
     int n = spectr2.size();
@@ -203,5 +213,6 @@ int main() {
     vector<Complex> rev1 = fft(vec1, vec1.size(), 1); 
     write_to_chanel(rev, rev1, spectr2.size(), buf); 
 */
+
     return 0;
 }
