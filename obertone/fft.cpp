@@ -59,7 +59,10 @@ std::vector<Complex> fft(std::vector<Complex> a, int n, int switch_fft) {
     if (n <= 1)
         return a; 
     int m = 0, k = 0;
-    Complex wn(cos(2 * (M_PI/n)), sin(2 * (M_PI/n))), w(1.0, 0.0);
+    double argument = 2 * (M_PI / n);
+    if (switch_fft)
+        argument *= -1;
+    Complex wn(cos(argument), sin(argument)), w(1.0, 0.0);
     std::vector<Complex> a0(n/2), a1(n/2);
     for (int i = 0; i < n; i++) {
         if (i % 2 == 0)

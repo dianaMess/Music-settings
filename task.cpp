@@ -156,39 +156,21 @@ int main() {
 //    cout<<buf.size()<<endl;
     vector<Complex> comp = parse(buf, 0);
     vector<Complex> comp1 = parse(buf, 1);
-    cout<<comp.size()<<"  "<<comp1.size()<<endl;
-    while (comp.size() != 1048576) {
+    while (comp.size() != 1048576) { //здесь до ближайшей степени двойки.Я тут просто сама вписала значение
         comp.push_back(Complex(0, 0));
         comp1.push_back(Complex(0, 0));
     }
-//    std::ofstream file;
-//    file.open("file.txt");
-//    file.open("file.txt");
-//    cout<<comp.size()<<endl;
-//    std::vector<Complex> func(comp.begin() + 5000, comp.begin() + 5000 + 4096);
-//    for (int i = 0; i < func.size(); i++) {
-//        file<<func[i].re()<<endl;
-//    }
-//    file.close();
-//    std::vector<Complex> spectr = fft(func, func.size(), 0);
     std::vector<Complex> spectr2 = fft(comp, comp.size(), 0);
     std::vector<Complex> spectr3 = fft(comp1, comp1.size(), 0);
-//    cout<<"spectrl "<<comp.size()<<endl<<"spectrr "<<comp1.size()<<endl;
-/*    std::ofstream file1;
-    file1.open("s.txt");
-    for (int i = 0;i < spectr.size(); i++) {
-        file1<<spectr[i].amp()<<endl;
-    }
-*/
-//    for (int i = 0;i < spectr.size(); i++)
-//        cout<<spectr[i].amp()<<endl;
 //----TASK 1----
-/*    
-    double time = 0.01;
-    int p = 0.5;
+//obertone    
+//переменные "time" и "p" подаются на входе
+//и сам звуковой файл тоже будет подаваться на вход
+    double time = 0.01; //!
+    int p = 0.5;  //!
     double max = 0.0;
     int prev = 0, step = 44100 * time, count = 0; 
-    cout<<step<<endl;
+//    cout<<step<<endl;
     for (int i = 0; i < spectr2.size(); i++) {
        if (i % step != 0) {
             if (spectr2[i].amp() > max) 
@@ -205,39 +187,21 @@ int main() {
             prev = i;
         }
     }
-    cout<<count<<endl;
-*/
+
 //----TASK 2----
 //change spectr
+/*
     vector<Complex> vec(spectr2.size() / 2);
     vector<Complex> vec1(spectr3.size() / 2);
     int n = spectr2.size();
     for (int i = 0; i < n / 2; i++) {
         vec[i] = spectr2[(int)(i * 1.5)];
-        vec1[i] = spectr3[(int)(i * 1.5)];
- //       vec[n - 1 - i] = spectr2[(n - 1 - i) / 2].amp();
+//        vec1[i] = spectr3[(int)(i * 1.5)];
+        vec[n - 1 - i] = spectr2[(n - 1 - i) * 1.5];
     }
-//    std::ofstream file1;
-//    file1.open("text.txt");
-//     for (int i = 0;i < spectr.size() / 2; i++) {
-//        file1<<vec[i]<<endl;
-//    }
     vector<Complex> rev = fft(vec, vec.size(), 1); 
     vector<Complex> rev1 = fft(vec1, vec1.size(), 1); 
     write_to_chanel(rev, rev1, spectr2.size(), buf); 
-///    std::ofstream output("07070057-out.wav", std::ios::out | std::ios::binary);
-//    output.write(byte.data(), byte.size());
-//    output.close();
-//----TASK 3----
-//EQUALIZER
-/*    std::vector<double> numbers;
-    std::vector<Complex> new_vec(spectr2.size());
-    cin<<numbers;
-    for (int i = 0; i < n; i++) {
-        new_vec[i] = spectr2[i].amp() * numbers[i]
-    }
-  */  
-//    for (int i = 0; i < n; i++)
-//        cout<<vec[i].amp()<<endl;
+*/
     return 0;
 }
