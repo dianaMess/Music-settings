@@ -32,7 +32,7 @@ public:
        
 };
 std::vector<Complex> fft(std::vector<Complex> a, int n, int switch_fft);
-std::vector<Complex> parse(std::vector<char> buf, bool chanel);
+std::vector<Complex> parse(std::vector<char> buf);
 void write_to_chanel(std::vector<Complex> spectrl, std::vector<Complex> spectrr,
                      int size, std::vector<char> buf);
 #endif

@@ -86,7 +86,8 @@ std::vector<Complex> fft(std::vector<Complex> a, int n, int switch_fft) {
     }
     return y;
 }
-    std::vector<Complex> parse(std::vector<char> buf, bool chanel) {
+    std::vector<Complex> parse(std::vector<char> buf) {
+        int chanel = 0;
         std::vector<Complex> function;
         int chunk_start = 0;
         std::string chunk_name(buf.begin() + chunk_start, buf.begin() + chunk_start + 4);

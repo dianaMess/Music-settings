@@ -87,7 +87,8 @@ std::vector<Complex> fft(std::vector<Complex> a, int n, int switch_fft) {
     }
     return y;
 }
-    std::vector<Complex> parse(std::vector<char> buf, bool chanel) {
+    std::vector<Complex> parse(std::vector<char> buf) {
+        int chanel = 0;
         std::vector<Complex> function;
         int chunk_start = 0;
         std::string chunk_name(buf.begin() + chunk_start, buf.begin() + chunk_start + 4);
@@ -106,8 +107,7 @@ std::vector<Complex> fft(std::vector<Complex> a, int n, int switch_fft) {
         }
         return function;
     }
-     void write_to_chanel(std::vector<Complex> spectrl, std::vector<Complex> spectrr,
-                         int size, std::vector<char> buf) {
+    void write_to_chanel(std::vector<Complex> spectrl, int size, std::vector<char> buf) {
         int shift = 0;
         std::ofstream output("new.wav", std::ios::out | std::ios::binary);
         std::vector<char> buf2 = buf;
@@ -116,7 +116,6 @@ std::vector<Complex> fft(std::vector<Complex> a, int n, int switch_fft) {
         int len = 0;
         for (int i = 0; i < size; i += 4) {
             *(short *)&buf2[768 + i] = spectrl[i].re();
-//            *(short *)&buf2[768 + i + 2] = spectrr[i].re();
             len = i + 2;
         }
         output.write(buf2.data(), len);
