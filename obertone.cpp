@@ -1,6 +1,6 @@
 #include<iostream>
 #include<vector>
-#include "fft.h"
+#include "src/fft.h"
 int power(int n) {
     int d = 1;
     while (d < n)

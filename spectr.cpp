@@ -1,6 +1,6 @@
 #include<iostream>
 #include<vector>
-#include "fft.h"
+#include "src/fft.h"
 using namespace std;
 int power(int n) {
     int d = 1;
